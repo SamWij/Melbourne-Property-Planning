@@ -1,0 +1,116 @@
+
+<div class="search-properties">
+  <div>
+    <input type="text" id="tags" class="search-input" placeholder="enter suburb">
+  </div>
+
+  <div>
+    <button class="search-btn">Search</button>
+  </div>
+</div>
+
+  <div class="status">
+    <h3>Status:</h3>
+    <input type="radio" name="search-status" value="APPLIED" checked> Applied<br>
+    <input type="radio" name="search-status" value="MOOTED"> Mooted<br>
+    <input type="radio" name="search-status" value="ABANDONED"> Abandoned <br>
+    <input type="radio" name="search-status" value="COMPLETED"> Completed <br>
+    <input type="radio" name="search-status" value="APPROVED"> Approved <br>
+    <input type="radio" name="search-status" value="UNDER CONSTRUCTION"> Under Construction <br>
+  </div>
+
+  <div class="toggle">
+    <p >List</p>
+      <label class="switch">
+      <input type="checkbox" class="toggle-input">
+      <div class="slider"></div>
+      </label>
+      <p>Map</p>
+  </div>
+
+
+
+  </div>
+</div>
+
+
+      <div id="map" >
+      </div>
+
+
+    <div class="wrapper">
+      <div class="error">No Results</div>
+    </div>
+
+
+
+
+<script id="property_template" type="text/x-handlebars-template">
+  <div class="property" data-id="{{ development_key }}">
+    <div class="field">
+      <span>Address: </span>{{street_address}}
+    </div>
+
+
+    <div class="field">
+      <span>Status: </span>{{ status }}
+    </div>
+
+    {{#if resi_dwelling}}
+      <div class="field">
+        <span>No of Residential Dwellings: </span>{{ resi_dwelling }}
+      </div>
+    {{else}}
+    {{/if}}
+
+    {{#if one_bdrm_dwe}}
+      <div class="field">
+        <span>No of 1 Bedrooms: </span>{{ one_bdrm_dwe }}
+      </div>
+    {{else}}
+    {{/if}}
+
+    {{#if two_bdrm_dwe}}
+      <div class="field">
+        <span>No of 2 Bedrooms: </span>{{ two_bdrm_dwe }}
+      </div>
+    {{else}}
+    {{/if}}
+
+    {{#if office_flr}}
+      <div class="field">
+        <span>Office Space: </span>{{ office_flr }}<sup>2</sup>
+      </div>
+    {{else}}
+    {{/if}}
+
+    {{#if retail_flr}}
+      <div class="field">
+        <span>Retail Space: </span>{{ retail_flr }}<sup>2</sup>
+      </div>
+    {{else}}
+    {{/if}}
+
+    {{#if bike_spaces}}
+      <div class="field">
+        <span>Bike spaces: </span>{{ bike_spaces }}
+      </div>
+    {{else}}
+    {{/if}}
+
+    {{#if car_spaces}}
+      <div class="field">
+        <span>Car Spaces: </span>{{ car_spaces }}
+      </div>
+    {{else}}
+    {{/if}}
+
+    {{#if town_planning_application_no}}
+      <div class="field">
+        <span>Planning Number: </span>{{ town_planning_application_no }}
+      </div>
+    {{else}}
+    {{/if}}
+
+  </div>
+  </script>
