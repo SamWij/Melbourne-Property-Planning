@@ -1,0 +1,141 @@
+<% provide(:title, @user.firstname) %>
+<aside>
+  <h1>
+    <%= @user.firstname %>, <%= @user.email %>
+  </h1>
+  <a href="" class="nav-li-item profile-item save">Save Favourites</a>
+  <a href="/favourites" class="nav-li-item profile-item display-fav">Display Favourites</a>
+  <a href="" class="nav-li-item profile-item">Settings</a>
+</aside>
+
+<div class="dash-background">
+  <div class="content-wrapper">
+    <form action="users/show" class="results-input">
+        <div class="toggle">
+          <p >List</p>
+          <label class="switch">
+            <input type="checkbox" class="toggle-input">
+            <div class="slider"></div>
+          </label>
+          <p>Map</p>
+        </div>
+
+
+      <div id="search-output">
+        <div id="search-bar">
+          <input type="text" id="tags" class="search-input">
+          <button class="search-btn">Search</button>
+        </div>
+
+        <div class="map-styling">
+          <div id="map" >
+          </div>
+        </div>
+
+        <div class="wrapper">
+        </div>
+      </div>
+
+      <div id="searchForm">
+        <h3>Filter:</h3>
+        <input type="checkbox" name="search-status" value="APPLIED" checked> Applied<br>
+        <input type="checkbox" name="search-status" value="MOOTED"> Mooted<br>
+        <input type="checkbox" name="search-status" value="ABANDONED"> Abandoned <br>
+        <input type="checkbox" name="search-status" value="COMPLETED"> Completed <br>
+        <input type="checkbox" name="search-status" value="APPROVED"> Approved <br>
+        <input type="checkbox" name="search-status" value="UNDER CONSTRUCTION"> Under Construction <br>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+
+<script id="property_template" type="text/x-handlebars-template">
+  <div class="property" data-id="{{ development_key }}">
+    <div class="field">
+      <span>Address: </span>{{street_address}}
+    </div>
+    <span class="star">&#9733</span>
+
+    <div class="field">
+      <span>Status: </span>{{ status }}
+    </div>
+
+    {{#if resi_dwelling}}
+      <div class="field">
+        <span>No of Residential Dwellings: </span>{{ resi_dwelling }}
+      </div>
+    {{else}}
+    {{/if}}
+
+    {{#if one_bdrm_dwe}}
+      <div class="field">
+        <span>No of 1 Bedrooms: </span>{{ one_bdrm_dwe }}
+      </div>
+    {{else}}
+    {{/if}}
+
+    {{#if two_bdrm_dwe}}
+      <div class="field">
+        <span>No of 2 Bedrooms: </span>{{ two_bdrm_dwe }}
+      </div>
+    {{else}}
+    {{/if}}
+
+    {{#if office_flr}}
+      <div class="field">
+        <span>Office Space: </span>{{ office_flr }}<sup>2</sup>
+      </div>
+    {{else}}
+    {{/if}}
+
+    {{#if retail_flr}}
+      <div class="field">
+        <span>Retail Space: </span>{{ retail_flr }}<sup>2</sup>
+      </div>
+    {{else}}
+    {{/if}}
+
+    {{#if bike_spaces}}
+      <div class="field">
+        <span>Bike spaces: </span>{{ bike_spaces }}
+      </div>
+    {{else}}
+    {{/if}}
+
+    {{#if car_spaces}}
+      <div class="field">
+        <span>Car Spaces: </span>{{ car_spaces }}
+      </div>
+    {{else}}
+    {{/if}}
+
+    {{#if town_planning_application_no}}
+      <div class="field">
+        <span>Planning Number: </span>{{ town_planning_application_no }}
+      </div>
+    {{else}}
+    {{/if}}
+
+  </div>
+  </script>
+
+<script>
+   $('#map').css("display","none");
+   $('.wrapper').css("display","block");
+
+  $(".toggle-input").click(function(){
+    if ($(".toggle-input").prop('checked') == false){
+      $('#map').css("display","none");
+      $('.wrapper').css("display","block");
+    };
+
+    if($(".toggle-input").prop('checked')== true){
+      $('#map').css("display","block");
+      $('.wrapper').css("display","none");
+    };
+
+    google.maps.event.trigger(map, 'resize');
+  });
+</script>

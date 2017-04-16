@@ -1,39 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PropertyApp</title>
-    <%= csrf_meta_tags %>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css?family=Palanquin+Dark|Titillium+Web" rel="stylesheet">
+    <title>City Of Melbourne Property Planning</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuPHNanaTiObqRgkX-rDqK_UEFBxWLYfM"
-      type="text/javascript"></script>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuPHNanaTiObqRgkX-rDqK_UEFBxWLYfM"
+    type="text/javascript"></script>
   </head>
 
   <body>
+     <%= render 'layouts/header' %>
+     <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+     <div class="container">
+   <%= yield %>
+   </div>
 
-    <nav>
-      <div class="logo">
-        Melbourne Property App
-      </div>
-    <div class="align-right">
-      <div class='nav-item'>About</div>
-      <div class='nav-item'>Home</div>
-    </div>
-    </nav>
-    <%= yield %>
 
-    <footer>
-      <div>&copy samwij 2017</div>
-      <a href="https://github.com/SamWij"><%=image_tag("github2.png", alt: "github", id: 'social')%></a>
-      <a href="https://www.linkedin.com/in/samwijesinha/"><%=image_tag("linkedin.png", alt: "linkedin", id: 'social')%></a>
-      <a href="https://twitter.com/CTRL_ALT_DEL"><%=image_tag("twitter.png", alt: "twitter", id: 'social')%></a>
-    </footer>
-
+    <%= render 'layouts/footer' %>
+  <div class="container">
+    <%= debug(params) if Rails.env.development? %>
+  </div>
   </body>
 </html>

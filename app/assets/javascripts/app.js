@@ -1,4 +1,5 @@
-$(document).ready(function() {
+var favouriteProp = [];
+var map;
 
 function getProperty() {
   var searchTerm = $('.search-input').val();
@@ -12,12 +13,7 @@ function getProperty() {
       clue_small_area: searchTerm
     }
   }).done(function(data){
-    if (!$.trim(data)) {
-      $('.error').css('display','block');
-    } else {
-    //google maps
     var locations = [];
-
     for (var i = 0; i < data.length; i++) {
       var id = data[i].property_id
       var lat = data[i].location_1.coordinates[0]
@@ -35,12 +31,25 @@ function getProperty() {
 
       $('.wrapper').append(html)
     });
-}
+
+    //click on star
+    $('.star').on('click', function(event){
+
+      var key = $(this).closest('.property').data('id');
+
+      if ($(this).css('color') === "rgb(255, 255, 255)"){
+        $(this).css('color', 'yellow');
+        favouriteProp.push(key);
+      } else {
+        $(this).css('color', 'white');
+        favouriteProp = $.grep(favouriteProp, function(a){return a != key;});
+      }
+    });
   });
 };
 
-
-$( function() {
+$(document).ready(function() {
+  $( function() {
     var suburbs = [
       "Carlton",
       "Carlton North",
@@ -65,60 +74,48 @@ $( function() {
 
   $(".search-btn").click(function(event){
     event.preventDefault();
-
-    if ($('.wrapper').children('.property').length > 0) {
+    if($('.wrapper').children('.property').length > 0) {
       $('.wrapper').children('.property').remove();
-
-    } else if ($('.error').css('display','block')) {
-        $('.error').css('display','none');
-    } else {
-
     }
     getProperty();
+  })
 
-})
+  $('.save').on('click', function(event){
+      $.ajax({
+        url: '/favourites/new',
+        method: 'post',
+        data: {
+          user_id: Number($('.id').data('id')),
+          favourites: favouriteProp
+          }
+      });
 
+  });
+});
 
 
 function initMap(locations) {
-  var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 11,
-      center: new google.maps.LatLng(-37.815, 144.963),
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 13,
+    center: new google.maps.LatLng(-37.815206, 144.963937),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+
+  var infowindow = new google.maps.InfoWindow();
+
+  var marker, i;
+
+  for (i = 0; i < locations.length; i++) {
+    marker = new google.maps.Marker({
+      position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+      map: map
     });
 
-    var infowindow = new google.maps.InfoWindow();
-
-    var marker, i;
-
-    for (i = 0; i < locations.length; i++) {
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-        map: map
-      });
-
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-        return function() {
-          infowindow.setContent(locations[i][0]);
-          infowindow.open(map, marker);
-        }
-      })(marker, i));
-    }
+    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+      return function() {
+        infowindow.setContent(locations[i][0]);
+        infowindow.open(map, marker);
+      }
+    })(marker, i));
+  }
 };
-
-
-$('#map').css("display","none");
-  $('.wrapper').css("display","block");
-
- $(".toggle-input").click(function(){
-   if ($(".toggle-input").prop('checked') === false){
-     $('#map').css("display","none");
-     $('.wrapper').css("display","block");
-
-   } else if (($(".toggle-input").prop('checked') === true)) {
-     $('#map').css("display","block");
-     $('.wrapper').css("display","none");
-   }
-   google.maps.event.trigger(map, 'resize');
- });
-});
