@@ -3,7 +3,7 @@ var map;
 
 function getProperty() {
   var searchTerm = $('.search-input').val();
-  var searchStatus = $("input[name='search-status']:checked").val();
+  var searchStatus = $( ".status" ).val();
 
   $.ajax({
     url: 'https://data.melbourne.vic.gov.au/resource/xt73-zf4j.json',
@@ -18,8 +18,8 @@ function getProperty() {
       var id = data[i].property_id
       var lat = data[i].location_1.coordinates[0]
       var long = data[i].location_1.coordinates[1]
-      var planning = data[i].location_1.coordinates[1]
-      locations.push([id, long, lat, i]);
+      var planning = data[i].street_address
+      locations.push([id, long, lat, planning, i]);
     };
 
     initMap(locations);
@@ -31,21 +31,9 @@ function getProperty() {
       var html = template(property)
 
       $('.wrapper').append(html)
+
     });
 
-    //click on star
-    $('.star').on('click', function(event){
-
-      var key = $(this).closest('.property').data('id');
-
-      if ($(this).css('color') === "rgb(255, 255, 255)"){
-        $(this).css('color', 'yellow');
-        favouriteProp.push(key);
-      } else {
-        $(this).css('color', 'white');
-        favouriteProp = $.grep(favouriteProp, function(a){return a != key;});
-      }
-    });
   });
 };
 
@@ -81,27 +69,15 @@ $(document).ready(function() {
     getProperty();
   })
 
-  $('.save').on('click', function(event){
-      $.ajax({
-        url: '/favourites/new',
-        method: 'post',
-        data: {
-          user_id: Number($('.id').data('id')),
-          favourites: favouriteProp
-          }
-      });
-
-  });
 });
 
 
 function initMap(locations) {
-  var myLatLng = {lat: -37.81130119999999, lng: 144.9652936};
+
 
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 10,
-    center: myLatLng,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    center:  {lat: -37.81130119999999, lng: 144.9652936},
+    zoom: 12
   });
 
   var infowindow = new google.maps.InfoWindow();

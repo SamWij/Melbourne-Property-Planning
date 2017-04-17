@@ -1,46 +1,42 @@
 <% provide(:title, @user.firstname) %>
-<div class="jumbotron search">
-  <div class="container">
+<div class="container search-container">
+  <div class="page-header">
+    <h3>Welcome, <%= @user.firstname %></h3>
+  </div>
+  <form action="users/show" class="results-input">
     <div class="row">
       <div class="col-md-4">
-      <h4><%= @user.firstname %>, <%= @user.email %></h4>
-      <section class="user_info">
-        <a href="" class="nav-li-item profile-item save">Save Favourites</a>
-        <a href="/favourites" class="nav-li-item profile-item display-fav">Display Favourites</a>
-        <a href="" class="nav-li-item profile-item">Settings</a>
-      </section>
+        <input type="text" id="tags" class="search-input" placeholder="suburb">
       </div>
-      <form action="users/show" class="results-input">
-        <div class="search-bar col-md-4">
-          <input type="text" id="tags" class="search-input">
-          <button class="search-btn btn btn-primary">Search</button>
-          <div class="toggle">
-            <p >List</p>
-            <label class="switch">
-              <input type="checkbox" class="toggle-input">
-              <div class="slider"></div>
-            </label>
-            <p>Map</p>
-          </div>
-        </div>
-
-
-
-
-        <div id="searchForm col-md-4">
-          <h5>Planning Status:</h5>
-          <input type="checkbox" name="search-status" value="APPLIED" checked> Applied<br>
-          <input type="checkbox" name="search-status" value="MOOTED"> Mooted<br>
-          <input type="checkbox" name="search-status" value="ABANDONED"> Abandoned <br>
-          <input type="checkbox" name="search-status" value="COMPLETED"> Completed <br>
-          <input type="checkbox" name="search-status" value="APPROVED"> Approved <br>
-          <input type="checkbox" name="search-status" value="UNDER CONSTRUCTION"> Under Construction <br>
-        </div>
-
-      </form>
+      <div class="col-md-4">
+        <select class="status">
+          <option name="search-status" value="APPLIED" checked> Applied</option>
+          <option  name="search-status" value="MOOTED"> Mooted</option>
+          <option name="search-status" value="ABANDONED"> Abandoned </option>
+          <option name="search-status" value="COMPLETED"> Completed </option>
+          <option name="search-status" value="APPROVED"> Approved </option>
+          <option name="search-status" value="UNDER CONSTRUCTION"> Under Construction </option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <button class="search-btn btn btn-primary center">Search</button>
+      </div>
     </div>
-  </div>
+
+    <div class="row">
+      <div class="col-md-12 toggle">
+        <p>List</p>
+        <label class="switch">
+          <input type="checkbox" class="toggle-input">
+          <div class="slider"></div>
+        </label>
+        <p>Map</p>
+      </div>
+    </div>
+  </form>
 </div>
+
+
 
 
 
@@ -58,78 +54,59 @@
 
 <script id="property_template" type="text/x-handlebars-template">
   <div class="property" data-id="{{ development_key }}">
-    <div class="field">
-      <span>Address: </span>{{street_address}}
+    <div class="panel panel-info">
+      <div class="panel-heading">
+          <h3 class="panel-title">{{street_address}}</h3>
+          <span class="status">Status: </span>{{ status }}
+        </div>
+      <div class="panel-body">
+        {{#if resi_dwelling}}
+
+          <span>No of Residential Dwellings: </span>{{ resi_dwelling }}
+        {{else}}
+        {{/if}}
+
+        {{#if one_bdrm_dwe}}
+            <span>No of 1 Bedrooms: </span>{{ one_bdrm_dwe }}
+        {{else}}
+        {{/if}}
+
+        {{#if two_bdrm_dwe}}
+            <span>No of 2 Bedrooms: </span>{{ two_bdrm_dwe }}
+        {{else}}
+        {{/if}}
+
+        {{#if two_bdrm_dwe}}
+            <span>Floors: </span>{{ floors_above }}
+        {{else}}
+        {{/if}}
+
+        {{#if office_flr}}
+            <span>Office Space: </span>{{ office_flr }}<sup>2</sup>
+        {{else}}
+        {{/if}}
+
+        {{#if retail_flr}}
+            <span>Retail Space: </span>{{ retail_flr }}<sup>2</sup>
+        {{else}}
+        {{/if}}
+
+        {{#if bike_spaces}}
+            <span>Bike spaces: </span>{{ bike_spaces }}
+        {{else}}
+        {{/if}}
+
+        {{#if car_spaces}}
+            <span>Car Spaces: </span>{{ car_spaces }}
+        {{else}}
+        {{/if}}
+
+        {{#if town_planning_application_no}}
+            <span>Planning Number: </span>{{ town_planning_application_no }}
+        {{else}}
+        {{/if}}
     </div>
-    <span class="star">&#9733</span>
-
-    <div class="field">
-      <span>Status: </span>{{ status }}
-    </div>
-
-    {{#if resi_dwelling}}
-      <div class="field">
-        <span>No of Residential Dwellings: </span>{{ resi_dwelling }}
-      </div>
-    {{else}}
-    {{/if}}
-
-    {{#if one_bdrm_dwe}}
-      <div class="field">
-        <span>No of 1 Bedrooms: </span>{{ one_bdrm_dwe }}
-      </div>
-    {{else}}
-    {{/if}}
-
-    {{#if two_bdrm_dwe}}
-      <div class="field">
-        <span>No of 2 Bedrooms: </span>{{ two_bdrm_dwe }}
-      </div>
-    {{else}}
-    {{/if}}
-
-    {{#if two_bdrm_dwe}}
-      <div class="field">
-        <span>Floors: </span>{{ floors_above }}
-      </div>
-    {{else}}
-    {{/if}}
-
-    {{#if office_flr}}
-      <div class="field">
-        <span>Office Space: </span>{{ office_flr }}<sup>2</sup>
-      </div>
-    {{else}}
-    {{/if}}
-
-    {{#if retail_flr}}
-      <div class="field">
-        <span>Retail Space: </span>{{ retail_flr }}<sup>2</sup>
-      </div>
-    {{else}}
-    {{/if}}
-
-    {{#if bike_spaces}}
-      <div class="field">
-        <span>Bike spaces: </span>{{ bike_spaces }}
-      </div>
-    {{else}}
-    {{/if}}
-
-    {{#if car_spaces}}
-      <div class="field">
-        <span>Car Spaces: </span>{{ car_spaces }}
-      </div>
-    {{else}}
-    {{/if}}
-
-    {{#if town_planning_application_no}}
-      <div class="field">
-        <span>Planning Number: </span>{{ town_planning_application_no }}
-      </div>
-    {{else}}
-    {{/if}}
-
+  </div>
   </div>
   </script>
 
@@ -138,16 +115,17 @@
    $('.wrapper').css("display","block");
 
   $(".toggle-input").click(function(){
-    if ($(".toggle-input").prop('checked') == false){
+
+    if ($(".toggle-input").prop('checked') === false){
       $('#map').css("display","none");
       $('.wrapper').css("display","block");
     };
 
-    if($(".toggle-input").prop('checked')== true){
+    if($(".toggle-input").prop('checked') === true){
       $('#map').css("display","block");
       $('.wrapper').css("display","none");
     };
+  google.maps.event.trigger(map, 'resize');
 
-    google.maps.event.trigger(map, 'resize');
   });
 </script>

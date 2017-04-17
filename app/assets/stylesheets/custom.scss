@@ -24,8 +24,9 @@ $gray-medium-light: #eaeaea;
 
 body {
   padding-top: 60px;
-}
+  font-family: 'Raleway', sans-serif;
 
+}
 section {
   overflow: auto;
 }
@@ -40,7 +41,11 @@ textarea {
     margin-bottom: 10px;
   }
 }
-
+.jumbotron {
+  background-image: image-url("hero-img.jpg");
+  background-size: cover;
+  height: 400px;
+}
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -93,14 +98,14 @@ p {
 }
 
 #map{
-  width: 500px;
-  height: 430px;
+  width: 800px;
+  height: 600px;
   /*margin-top: -250px;*/
 }
 .col-md-4 {
   margin: 0;
   padding: 0;
-  height: 125px;
+  height: 190px;
 }
 
 /* The switch - the box around the slider */
@@ -171,46 +176,32 @@ p {
   margin-left: 35px;
 }
 
-#search-bar {
-  justify-content: center;
-  margin-bottom: 10px;
+.search-input,
+.status {
+  width: 300px;
+  height: 35px;
+  border-radius: 10px;
+
 }
 
-.search-input{
-  height: 35px;
-  width: 200px;
-  border: none;
-  color: white;
-  padding-left: 7px;
-  background-color: black;
-  margin-right: 10px;
-  margin-bottom: 30px;
-  transition: 0.3s;
-  border-radius: 3px;
-  outline-width: 1px;
+.search-container {
+  background-image: image-url("hero-img.jpg");
+  background-size: cover;
+  padding: 15px;
 }
+
+.row {
+  padding: 10px;
+}
+
 /* footer */
 
-footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid $gray-medium-light;
-  color: $gray-light;
-  a {
-    color: $gray;
-    &:hover {
-      color: $gray-darker;
-    }
-  }
-  small {
-    float: left;
-  }
-  ul {
-    float: right;
-    list-style: none;
-    li {
-      float: left;
-      margin-left: 15px;
-    }
-  }
+.footer {
+  height: 100px;
+  background-color: black;
+}
+
+ul {
+  list-style: none;
+  text-align: right;
 }
