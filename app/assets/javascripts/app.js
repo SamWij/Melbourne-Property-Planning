@@ -18,6 +18,7 @@ function getProperty() {
       var id = data[i].property_id
       var lat = data[i].location_1.coordinates[0]
       var long = data[i].location_1.coordinates[1]
+      var planning = data[i].location_1.coordinates[1]
       locations.push([id, long, lat, i]);
     };
 
@@ -95,9 +96,11 @@ $(document).ready(function() {
 
 
 function initMap(locations) {
+  var myLatLng = {lat: -37.81130119999999, lng: 144.9652936};
+
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 13,
-    center: new google.maps.LatLng(-37.815206, 144.963937),
+    zoom: 10,
+    center: myLatLng,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
 

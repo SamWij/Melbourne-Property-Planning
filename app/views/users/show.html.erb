@@ -1,54 +1,59 @@
 <% provide(:title, @user.firstname) %>
-<aside>
-  <h1>
-    <%= @user.firstname %>, <%= @user.email %>
-  </h1>
-  <a href="" class="nav-li-item profile-item save">Save Favourites</a>
-  <a href="/favourites" class="nav-li-item profile-item display-fav">Display Favourites</a>
-  <a href="" class="nav-li-item profile-item">Settings</a>
-</aside>
-
-<div class="dash-background">
-  <div class="content-wrapper">
-    <form action="users/show" class="results-input">
-        <div class="toggle">
-          <p >List</p>
-          <label class="switch">
-            <input type="checkbox" class="toggle-input">
-            <div class="slider"></div>
-          </label>
-          <p>Map</p>
-        </div>
-
-
-      <div id="search-output">
-        <div id="search-bar">
+<div class="jumbotron search">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+      <h4><%= @user.firstname %>, <%= @user.email %></h4>
+      <section class="user_info">
+        <a href="" class="nav-li-item profile-item save">Save Favourites</a>
+        <a href="/favourites" class="nav-li-item profile-item display-fav">Display Favourites</a>
+        <a href="" class="nav-li-item profile-item">Settings</a>
+      </section>
+      </div>
+      <form action="users/show" class="results-input">
+        <div class="search-bar col-md-4">
           <input type="text" id="tags" class="search-input">
-          <button class="search-btn">Search</button>
-        </div>
-
-        <div class="map-styling">
-          <div id="map" >
+          <button class="search-btn btn btn-primary">Search</button>
+          <div class="toggle">
+            <p >List</p>
+            <label class="switch">
+              <input type="checkbox" class="toggle-input">
+              <div class="slider"></div>
+            </label>
+            <p>Map</p>
           </div>
         </div>
 
-        <div class="wrapper">
+
+
+
+        <div id="searchForm col-md-4">
+          <h5>Planning Status:</h5>
+          <input type="checkbox" name="search-status" value="APPLIED" checked> Applied<br>
+          <input type="checkbox" name="search-status" value="MOOTED"> Mooted<br>
+          <input type="checkbox" name="search-status" value="ABANDONED"> Abandoned <br>
+          <input type="checkbox" name="search-status" value="COMPLETED"> Completed <br>
+          <input type="checkbox" name="search-status" value="APPROVED"> Approved <br>
+          <input type="checkbox" name="search-status" value="UNDER CONSTRUCTION"> Under Construction <br>
         </div>
-      </div>
 
-      <div id="searchForm">
-        <h3>Filter:</h3>
-        <input type="checkbox" name="search-status" value="APPLIED" checked> Applied<br>
-        <input type="checkbox" name="search-status" value="MOOTED"> Mooted<br>
-        <input type="checkbox" name="search-status" value="ABANDONED"> Abandoned <br>
-        <input type="checkbox" name="search-status" value="COMPLETED"> Completed <br>
-        <input type="checkbox" name="search-status" value="APPROVED"> Approved <br>
-        <input type="checkbox" name="search-status" value="UNDER CONSTRUCTION"> Under Construction <br>
-      </div>
-    </form>
-
+      </form>
+    </div>
   </div>
 </div>
+
+
+
+
+
+<div class="map-styling">
+  <div id="map" >
+  </div>
+</div>
+
+<div class="wrapper">
+</div>
+
 
 
 <script id="property_template" type="text/x-handlebars-template">
