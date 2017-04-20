@@ -6,7 +6,11 @@
         <li><%= link_to "Home", root_path %></li>
         <% if logged_in? %>
           <li><%= link_to "Profile", current_user %></li>
-          <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+          <li>
+            <%= form_tag logout_path, method: 'delete' do %>
+              <%= submit_tag "Log out" %>
+            <% end %>
+          </li>
         <% else %>
           <li><%= link_to "Log in", login_path %></li>
         <% end %>
