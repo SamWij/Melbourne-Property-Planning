@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.1'
 gem 'bootstrap-sass', '3.3.6'
 
 gem 'bcrypt'

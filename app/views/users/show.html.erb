@@ -4,11 +4,11 @@
     <h3>Welcome, <%= @user.firstname %></h3>
   </div>
   <form action="users/show" class="results-input">
-    <div class="row">
-      <div class="col-md-4">
+    <div class="row text-center">
+      <div class="col-md-3 suburb-wrapper">
         <input type="text" id="tags" class="search-input" placeholder="suburb">
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3 status-wrapper">
         <select class="status">
           <option name="search-status" value="APPLIED" checked> Applied</option>
           <option  name="search-status" value="MOOTED"> Mooted</option>
@@ -18,13 +18,7 @@
           <option name="search-status" value="UNDER CONSTRUCTION"> Under Construction </option>
         </select>
       </div>
-      <div class="col-md-4">
-        <button class="search-btn btn btn-primary center">Search</button>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12 toggle">
+      <div class="col-md-3 toggle">
         <p>List</p>
         <label class="switch">
           <input type="checkbox" class="toggle-input">
@@ -32,14 +26,12 @@
         </label>
         <p>Map</p>
       </div>
+      <div class="col-md-3 search-btn-wrapper">
+        <button class="search-btn btn btn-primary center">Search</button>
+      </div>
     </div>
   </form>
 </div>
-
-
-
-
-
 
 
 <div class="map-styling">

@@ -1,29 +1,30 @@
+<div class="container-signup">
+  <h1 class="title">Sign up</h1>
+  <form accept-charset="UTF-8" action="/users" class="new_user"
+        id="new_user" method="post">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= form_for(@user, url: signup_path) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
 
-<h1>Sign up</h1>
-<form accept-charset="UTF-8" action="/users" class="new_user"
-      id="new_user" method="post">
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user, url: signup_path) do |f| %>
-    <%= render 'shared/error_messages', object: f.object %>
+        <%= f.label :firstname %>
+        <%= f.text_field :firstname, class: 'form-control' %>
 
-      <%= f.label :firstname %>
-      <%= f.text_field :firstname, class: 'form-control' %>
+        <%= f.label :surname %>
+        <%= f.text_field :surname, class: 'form-control'  %>
 
-      <%= f.label :surname %>
-      <%= f.text_field :surname, class: 'form-control'  %>
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control' %>
 
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
-
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-
-      <%= f.submit "Create my account", class: "btn btn-primary" %>
-    <% end %>
+        <%= f.label :password_confirmation, "Confirmation" %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      <br>
+        <%= f.submit "Create my account", class: "btn btn-primary" %>
+      <% end %>
+    </div>
   </div>
+  </form>
 </div>
-</form>

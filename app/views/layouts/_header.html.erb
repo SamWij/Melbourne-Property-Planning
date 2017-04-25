@@ -1,20 +1,32 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
+
+<header class="navbar navbar-fixed-top">
+
     <%= link_to "Melbourne Activity Development Monitoring", 'https://data.melbourne.vic.gov.au/Property-Planning/Major-development-projects-Development-Activity-Mo/gh7s-qda8', id: "logo" %>
     <nav>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home", root_path %></li>
-        <% if logged_in? %>
-          <li><%= link_to "Profile", current_user %></li>
-          <li>
-            <%= form_tag logout_path, method: 'delete' do %>
-              <%= submit_tag "Log out" %>
-            <% end %>
-          </li>
-        <% else %>
-          <li><%= link_to "Log in", login_path %></li>
-        <% end %>
-      </ul>
+      <div class="btn-group pull-right" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+          <%= link_to "Home", root_path,  class: "btn btn-lg" %>
+        </div>
+        <div class="btn-group" role="group">
+          <%= link_to "About",   about_path, class: "btn btn-lg" %>
+        </div>
+        <div class="btn-group" role="group">
+          <%= link_to "Contact", contact_path, class: "btn btn-lg" %>
+        </div>
+          <% if logged_in? %>
+        <div class="btn-group" role="group">
+          <%= link_to "Profile", current_user, class: "btn btn-lg" %>
+        </div>
+        <div class="btn-group" role="group">
+          <%= form_tag logout_path, method: 'delete' do %>
+            <%= submit_tag "Log out", class: "btn btn-lg" %>
+          <% end %>
+        </div>
+          <% else %>
+        <div class="btn-group" role="group">
+            <%= link_to "Log in", login_path,  class: "btn btn-lg" %>
+          <% end %>
+        </div>
     </nav>
-  </div>
+
 </header>
