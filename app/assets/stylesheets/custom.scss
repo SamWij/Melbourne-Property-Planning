@@ -109,6 +109,8 @@ p {
   height: 630px;
   background: image-url("melb.jpg");
   background-size: cover;
+  background-color: rgba(236,240,241, 0.4);
+  background-blend-mode: lighten;
   width: 100%;
 
 }
