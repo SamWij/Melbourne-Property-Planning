@@ -13,13 +13,15 @@ function getProperty() {
       clue_small_area: searchTerm
     }
   }).done(function(data){
+    console.log(data)
     var locations = [];
     for (var i = 0; i < data.length; i++) {
       var id = data[i].property_id
       var lat = data[i].location_1.coordinates[0]
       var long = data[i].location_1.coordinates[1]
       var planning = data[i].street_address
-      locations.push([id, long, lat, planning, i]);
+      var planning_no = data[i].town_planning_application_no
+      locations.push([id, long, lat, planning, planning_no]);
     };
 
     initMap(locations);
@@ -32,9 +34,13 @@ function getProperty() {
 
       $('.wrapper').append(html)
 
+
+
     });
 
   });
+
+
 };
 
 $(document).ready(function() {
@@ -56,7 +62,8 @@ $(document).ready(function() {
       "South Yarra",
       "West Melbourne"
       ];
-    $( "#tags" ).autocomplete({
+
+    $("#autocomplete").autocomplete({
         source: suburbs
     });
   });
@@ -67,17 +74,30 @@ $(document).ready(function() {
       $('.wrapper').children('.property').remove();
     }
     getProperty();
-  })
+  });
+
+  $('#toggle_btn').bootstrapToggle('on')
+  $('.wrapper').css("display","none");
+
+  $("#toggle_btn").on("change", function () {
+    if ($(this).parent().hasClass("off")) {
+      $('#map').css("display","none");
+      $('.wrapper').css("display","block");
+    } else {
+      $('#map').css("display","block");
+      $('.wrapper').css("display","none");
+      google.maps.event.trigger(map, 'resize');
+    }
+  });
 
 });
 
 
 function initMap(locations) {
-
-
+  console.log(locations)
   map = new google.maps.Map(document.getElementById('map'), {
-    center:  {lat: -37.81130119999999, lng: 144.9652936},
-    zoom: 12
+    center:  {lat: locations[1][1], lng: locations[1][2]},
+    zoom: 15
   });
 
   var infowindow = new google.maps.InfoWindow();
@@ -85,15 +105,17 @@ function initMap(locations) {
   var marker, i;
 
   for (i = 0; i < locations.length; i++) {
+    var labels = locations[i][3];
     marker = new google.maps.Marker({
       position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+      url: 'http://www.melbourne.vic.gov.au/building-and-development/property-information/planning-building-registers/Pages/town-planning-permits-register-search-results.aspx?permit='+ locations[i][4],
+      title: labels,
       map: map
     });
 
-    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+    google.maps.event.addListener(marker, 'click', (function() {
       return function() {
-        infowindow.setContent(locations[i][0]);
-        infowindow.open(map, marker);
+        window.open(marker.url);
       }
     })(marker, i));
   }

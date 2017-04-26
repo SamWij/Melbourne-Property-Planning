@@ -6,7 +6,7 @@
   <form action="users/show" class="results-input">
     <div class="row text-center">
       <div class="col-md-3 suburb-wrapper">
-        <input type="text" id="tags" class="search-input" placeholder="suburb">
+        <input type="text" id="autocomplete" class="search-input" placeholder="suburb">
       </div>
       <div class="col-md-3 status-wrapper">
         <select class="status">
@@ -19,12 +19,8 @@
         </select>
       </div>
       <div class="col-md-3 toggle">
-        <p>List</p>
-        <label class="switch">
-          <input type="checkbox" class="toggle-input">
-          <div class="slider"></div>
-        </label>
-        <p>Map</p>
+        <input type="checkbox" id="toggle_btn"  data-toggle="toggle" data-on="Map" data-off="List">
+
       </div>
       <div class="col-md-3 search-btn-wrapper">
         <button class="search-btn btn btn-primary center">Search</button>
@@ -48,52 +44,59 @@
   <div class="property" data-id="{{ development_key }}">
     <div class="panel panel-info">
       <div class="panel-heading">
-          <h3 class="panel-title">{{street_address}}</h3>
+          <h3 class="panel-title"><a href='http://www.melbourne.vic.gov.au/building-and-development/property-information/planning-building-registers/Pages/town-planning-permits-register-search-results.aspx?permit={{ town_planning_application_no }}' target="_blank">{{street_address}}</a></h3>
           <span class="status">Status: </span>{{ status }}
         </div>
       <div class="panel-body">
         {{#if resi_dwelling}}
-
           <span>No of Residential Dwellings: </span>{{ resi_dwelling }}
         {{else}}
         {{/if}}
 
         {{#if one_bdrm_dwe}}
+          <br>
             <span>No of 1 Bedrooms: </span>{{ one_bdrm_dwe }}
         {{else}}
         {{/if}}
 
         {{#if two_bdrm_dwe}}
+          <br>
             <span>No of 2 Bedrooms: </span>{{ two_bdrm_dwe }}
         {{else}}
         {{/if}}
 
         {{#if two_bdrm_dwe}}
+          <br>
             <span>Floors: </span>{{ floors_above }}
         {{else}}
         {{/if}}
 
         {{#if office_flr}}
+          <br>
             <span>Office Space: </span>{{ office_flr }}<sup>2</sup>
         {{else}}
         {{/if}}
 
         {{#if retail_flr}}
+          <br>
             <span>Retail Space: </span>{{ retail_flr }}<sup>2</sup>
         {{else}}
         {{/if}}
 
         {{#if bike_spaces}}
+          <br>
             <span>Bike spaces: </span>{{ bike_spaces }}
         {{else}}
         {{/if}}
 
         {{#if car_spaces}}
+          <br>
             <span>Car Spaces: </span>{{ car_spaces }}
         {{else}}
         {{/if}}
 
         {{#if town_planning_application_no}}
+          <br>
             <span>Planning Number: </span>{{ town_planning_application_no }}
         {{else}}
         {{/if}}
@@ -101,23 +104,3 @@
   </div>
   </div>
   </script>
-
-<script>
-   $('#map').css("display","none");
-   $('.wrapper').css("display","block");
-
-  $(".toggle-input").click(function(){
-
-    if ($(".toggle-input").prop('checked') === false){
-      $('#map').css("display","none");
-      $('.wrapper').css("display","block");
-    };
-
-    if($(".toggle-input").prop('checked') === true){
-      $('#map').css("display","block");
-      $('.wrapper').css("display","none");
-    };
-  google.maps.event.trigger(map, 'resize');
-
-  });
-</script>
