@@ -1,4 +1,4 @@
-var favouriteProp = [];
+
 var map;
 
 function getProperty() {
@@ -34,13 +34,9 @@ function getProperty() {
 
       $('.wrapper').append(html)
 
-
-
     });
 
   });
-
-
 };
 
 $(document).ready(function() {
